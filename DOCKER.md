@@ -87,7 +87,7 @@ The original error showed:
 ## Architecture
 
 - **Multi-stage build**: Reduces final image size
-- **Node 18 Alpine**: Lightweight base image for building
+- **Node 20 Alpine**: Lightweight base image for building
 - **Nginx Alpine**: Efficient production server
 - **Health checks**: Built-in container health monitoring
 
