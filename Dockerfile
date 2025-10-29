@@ -1,13 +1,23 @@
 # Multi-stage build for React frontend
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies - using npm install instead of npm ci for flexibility
-RUN npm install
+# Set npm configurations
+ENV NPM_CONFIG_LOGLEVEL=error
+ENV NPM_CONFIG_FETCH_TIMEOUT=60000
+
+# Install dependencies
+# Using npm install for better compatibility when package-lock.json might not be present
+RUN npm install --prefer-offline --no-audit --legacy-peer-deps; \
+    if [ ! -d "node_modules" ]; then \
+        echo "First install failed, retrying..."; \
+        rm -rf /root/.npm /app/node_modules; \
+        npm install --no-audit --legacy-peer-deps; \
+    fi
 
 # Copy application source
 COPY . .

@@ -76,9 +76,13 @@ npm run dev
 ## Key Changes from Error Message
 
 The original error showed:
-1. **Missing `package-lock.json` with `npm ci`** - Fixed by using `npm install` in Dockerfile
-2. **Obsolete `version` attribute** - Removed from `docker-compose.yml`
+1. **Missing `package-lock.json` with `npm ci`** - Fixed by:
+   - Using `npm install` instead of `npm ci` in Dockerfile
+   - This works whether or not package-lock.json exists
+   - Adds `--prefer-offline --no-audit` flags for better reliability
+2. **Obsolete `version` attribute** - Removed from `docker-compose.yml` (no longer required in Compose v2+)
 3. **Separate backend/frontend structure** - Simplified to single frontend service
+4. **Node version incompatibility** - Updated from Node 18 to Node 20 (required for Vite 7)
 
 ## Architecture
 
