@@ -98,5 +98,5 @@ docker compose down
 ## Notes
 
 - If you need a backend service, add it to `docker-compose.yml` following the same pattern
-- The package-lock.json in the root directory will be used for dependency installation
+- The Dockerfile uses `npm install` which will respect package-lock.json if present, but can also work without it
 - Nginx configuration supports React Router for SPA routing

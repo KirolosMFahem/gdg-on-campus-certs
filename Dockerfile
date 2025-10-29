@@ -16,7 +16,7 @@ RUN npm install --prefer-offline --no-audit --legacy-peer-deps; \
     if [ ! -d "node_modules" ]; then \
         echo "First install failed, retrying..."; \
         rm -rf /root/.npm /app/node_modules; \
-        npm install --no-audit --legacy-peer-deps; \
+        npm install --prefer-offline --no-audit --legacy-peer-deps; \
     fi
 
 # Copy application source
